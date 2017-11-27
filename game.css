@@ -1,0 +1,26 @@
+body {
+  background-color: #232323;
+}
+
+/* TODO Make six squares using 90% with margins using 10% And use padding to make the squares */
+.square {
+  width: 30%;
+  background-color: purple;
+  padding-bottom: 30%;
+  margin: 1.66%;
+  float: left;
+}
+
+/* For Testing:
+border: 1px solid yellow;
+margin: .66%; */
+
+/* TODO Center horizontally the six squares */
+#container {
+  max-width: 600px;
+  margin: 5% auto;
+}
+
+h1 {
+  color: white;
+}
