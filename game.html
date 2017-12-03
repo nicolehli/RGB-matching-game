@@ -6,8 +6,18 @@
     <link rel="stylesheet" href="game.css">
   </head>
   <body>
+    <!-- TITLE -->
     <h1>The Great <span id="colorDisplayID">RGB</span> Colour Game</h1>
 
+    <!-- STATUS UPDATE & EASY or HARD MODES AREA -->
+    <div id="banner">
+      <button type="button" id="newGameBtn">New Colors</button>
+      <span id="statusDisplayID">Status Update Bar</span>
+      <button type="button" id="easyBtn">Easy</button>
+      <button type="button" id="hardBtn" class="buttonSelected">Hard</button>
+    </div>
+
+    <!-- GAME TILES -->
     <div id="container">
       <div class="square"></div>
       <div class="square"></div>
@@ -17,6 +27,8 @@
       <div class="square"></div>
     </div>
 
+
+    <!-- GAME FUNCTIONS -->
     <script type="text/javascript" src="game.js"></script>
   </body>
 </html>
