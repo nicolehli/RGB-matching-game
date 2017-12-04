@@ -20,21 +20,24 @@ function init() {
   reset();
 }
 
+// Here I make a Named Callback function
 function setupModeListeners() {
   // Mode - Easy or Hard - Event Listeners
   for (var i = 0; i < modeBtn.length; i++) {
-    modeBtn[i].addEventListener("click", function() {
-      modeBtn[0].classList.remove("buttonSelected");
-      modeBtn[1].classList.remove("buttonSelected");
-
-      this.classList.add("buttonSelected");
-      this.textContent === "Easy" ? mode = 3 : mode = 6;
-
-      reset();
-    });
+    modeBtn[i].addEventListener("click", callback);
   }
 }
 
+function callback() {
+  modeBtn[0].classList.remove("buttonSelected");
+  modeBtn[1].classList.remove("buttonSelected");
+  this.classList.add("buttonSelected");
+  this.textContent === "Easy" ? mode = 3 : mode = 6;
+
+  reset();
+}
+
+// Here I am using an Anonymous Callback Function
 function setupSquareListeners() {
   // Square Listeners
   for (var i = 0; i < squares.length; i++) {
