@@ -1,36 +1,79 @@
 /* HEADER AND STATUS BAR */
+body {
+  background-color: #232323;
+  margin: 0;
+  font-family: "Montserrat","Avenir";
+  text-transform: uppercase;
+}
 
 #banner {
-  height: 30px;
+  height: 2%;
+  color: red;
+  background: white;
   text-align: center;
+  margin: 0;
+
 }
+
+#statusDisplayID {
+  display: inline-block;
+  width: 30%;
+}
+
+#bannerLeft, #bannerRight {
+  width: 35%;
+}
+
+
 
 h1 {
   color: white;
   text-align: center;
+  background: steelblue;
+  margin: 0;
+  font-weight: 200;
+  padding: 20px 0;
+  line-height: 1.1;
 }
 
-#statusDisplayID {
+button {
+  color: steelblue;
+  background: none;
+  border: none;
+  height: 100%;
+  letter-spacing: 1px;
+  font-size: inherit;
+  text-transform: uppercase;
+  font-weight: 700;
+  outline: none;
+}
+
+button:hover {
   color: white;
+  background: steelblue;
+  transition: all 0.3s;
+  --webkit-transition: background-color 0.3s;  // browser support
+  --moz-transition: background-color 0.3s;
 }
 
 .buttonSelected {
-  background: blue;
+  background: steelblue;
+  color: white;
 }
 
 /* GAME PLAY */
 
-body {
-  background-color: #232323;
-}
-
-/* TODO Make six squares using 90% with margins using 10% And use padding to make the squares */
+/* Make six squares using 90% with margins using 10% And use padding to make the squares */
 .square {
   width: 30%;
   background-color: purple;
   padding-bottom: 30%;
   margin: 1.66%;
   float: left;
+  border-radius: 15%;
+  transition: background-color 0.6s;
+  --webkit-transition: background-color 0.6s;  // browser support
+  --moz-transition: background-color 0.6s;
 }
 
 /* For Testing:
@@ -40,5 +83,6 @@ margin: .66%; */
 /* TODO Center horizontally the six squares */
 #container {
   max-width: 600px;
-  margin: 5% auto;
+  margin: 20px auto;
+
 }
