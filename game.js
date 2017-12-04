@@ -1,127 +1,64 @@
-// alert("CONNECTED!");
-
-////////////////////////////////
-/////////////    SETUP    //////
-////////////////////////////////
-
-// Game Title
+var mode = 6; // Game starts with 6 tiles in Hard Mode
+var colors = [];
+var pickedColor; // Solution Tile
 var h1 = document.querySelector("h1");
-
-// Tiles Area
-var colors = assignRandomColors(6);
-var pickedColor = pickColor(); // Solution Tile
 var squares = document.querySelectorAll(".square");
 var colorDisplay = document.getElementById("colorDisplayID");
 var statusDisplay = document.querySelector("#statusDisplayID");
+var newGameBtn = document.getElementById("newGameBtn"); // Status Bar Variables
+var modeBtn = document.querySelectorAll(".mode");
 
-// Status Bar with Buttons
-var newGameBtn = document.getElementById("newGameBtn");
-var easyBtn = document.querySelector("#easyBtn");
-var hardBtn = document.querySelector("#hardBtn");
+init();
+
+function init() {
+
+  setupModeListeners();
+  setupSquareListeners();
 
 
-////////////////////////////////////
-/////////////    INIT GAME    //////
-////////////////////////////////////
 
-// Game Play with pickedColor as our Solution Tile
-var mode = 6; // easy = 3 and hard = 6
-pickedColor = pickColor();
-colorDisplay.textContent = pickedColor;
+  reset();
+}
 
-for (var i = 0; i < squares.length; i++) {
-  // add initial colors to squares
-  squares[i].style.backgroundColor = colors[i];
-  // add click listeners to squares
-  squares[i].addEventListener("click", function() {
-    // grab color of clicked squares
-    var userSelected = this.style.backgroundColor;
+function setupModeListeners() {
+  // Mode - Easy or Hard - Event Listeners
+  for (var i = 0; i < modeBtn.length; i++) {
+    modeBtn[i].addEventListener("click", function() {
+      modeBtn[0].classList.remove("buttonSelected");
+      modeBtn[1].classList.remove("buttonSelected");
 
-    // compare selected color with pickedColor
-    if (userSelected === pickedColor) {
-      changeColors(pickedColor);
-      h1.style.backgroundColor = pickedColor;
-      statusDisplay.textContent = "You are correct!"
-    } else {
-      this.style.backgroundColor = "#232323";
-      statusDisplay.textContent = "Try Again!"
-    }
-  });
+      this.classList.add("buttonSelected");
+      this.textContent === "Easy" ? mode = 3 : mode = 6;
+
+      reset();
+    });
+  }
+}
+
+function setupSquareListeners() {
+  // Square Listeners
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].addEventListener("click", function() {
+      var userSelected = this.style.background;
+
+      if (userSelected === pickedColor) {
+        statusDisplay.textContent = "Correct!";
+        newGameBtn.textContent = "Play Again?";
+        changeColors(userSelected);
+        h1.style.background = userSelected;
+      } else {
+        this.style.background = "#232323";
+        statusDisplay.textContent = "Try Again";
+      }
+    });
+  };
 }
 
 
-
-//////////////////////////////////
-/////////////    BUTTONS    //////
-//////////////////////////////////
-
-// Button 2: Easy button
-// show button level Easy if buttonSelected
-easyBtn.addEventListener("click", function() {
-  mode = 3;
-  h1.style.background = "steelblue";
-  easyBtn.classList.add("buttonSelected");
-  hardBtn.classList.remove("buttonSelected");
-  statusDisplay.textContent = "You've picked Easy Mode"
-
-  // general new tiles, new colors, set title to new solution
-  colors = assignRandomColors(mode);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-
-  // show 3 tiles in gamePlay
-  for (var i = 0; i < squares.length; i++) {
-    if (colors[i]) {
-      squares[i].style.background = colors[i];
-    } else {
-      // hide the tiles with no random colors[i]
-      squares[i].style.display = "none";
-      // NOTE Element will not be displayed
-    }
-  }
-});
-
-// Button 3: Hard Button
-hardBtn.addEventListener("click", function() {
-  mode = 6;
-  h1.style.background = "steelblue";
-  easyBtn.classList.remove("buttonSelected");
-  hardBtn.classList.add("buttonSelected");
-  statusDisplay.textContent = "You've picked Hard Mode"
-
-  // general new tiles, new colors, set title to new solution
-  colors = assignRandomColors(mode);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-
-  // show 6 tiles in gamePlay
-  for (var i = 0; i < squares.length; i++) {
-    squares[i].style.background = colors[i];
-    squares[i].style.display = "block";
-    // NOTE Element is rendered as a block-level element, but any value that renders the element will do
-  }
-});
-
-// Button 1: newGameBtn randomize coloured tiles
+// New Game
 newGameBtn.addEventListener("click", function() {
-  statusDisplay.textContent = "";
-  h1.style.background = "steelblue";
-
-  // general new tiles, new colors, set title to new solution
-  colors = assignRandomColors(mode);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-
-  // change colors of the squares
-  for (var i = 0; i < squares.length; i++) {
-    // add initial colors to squares
-    squares[i].style.backgroundColor = colors[i];
-  }
+  reset();
 });
-
-
-
-
 
 
 // function will set all squares to WINNING color
@@ -132,7 +69,7 @@ function changeColors(color) {
   }
 }
 
-// function will randomly pick a tile to be the SOLUTION
+// function will randomly pick a solution tile
 function pickColor() {
   var randomNum = Math.floor(Math.random() * colors.length);
   return colors[randomNum];
@@ -147,7 +84,7 @@ function assignRandomColors(num) {
   return arr;
 }
 
-// function generate RANDOM COLORS
+// function will generate random color to be assign to squares
 function randomColor() {
   // pick a "red" from 0 - 255
   var r = Math.floor(Math.random() * (255 + 1));
@@ -156,7 +93,27 @@ function randomColor() {
   // pick a "blue" from 0 - 255
   var b = Math.floor(Math.random() * (255 + 1));
 
-  // make sure rgb(0, 0, 0) have space after the comma,
+  // NB make sure rgb(0, 0, 0) have space after the comma,
   // and rgb is lowercase
   return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+// function will update game play
+function reset() {
+  colors = assignRandomColors(mode);
+  pickedColor = pickColor();
+
+  for (var i = 0; i < squares.length; i++) {
+    if (colors[i]) {
+      squares[i].style.background = colors[i];
+      squares[i].style.display = "block";
+    } else {
+      squares[i].style.display = "none";
+    }
+  }
+
+  newGameBtn.textContent = "New Colors";
+  h1.style.background = "steelblue";
+  colorDisplay.textContent = pickedColor;
+  statusDisplay.textContent = "";
 }
