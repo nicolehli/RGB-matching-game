@@ -14,9 +14,6 @@ function init() {
 
   setupModeListeners();
   setupSquareListeners();
-
-
-
   reset();
 }
 
@@ -33,7 +30,6 @@ function callback() {
   modeBtn[1].classList.remove("buttonSelected");
   this.classList.add("buttonSelected");
   this.textContent === "Easy" ? mode = 3 : mode = 6;
-
   reset();
 }
 
@@ -50,7 +46,7 @@ function setupSquareListeners() {
         changeColors(userSelected);
         h1.style.background = userSelected;
       } else {
-        this.style.background = "#232323";
+        this.style.background = document.querySelector("body").style.background;
         statusDisplay.textContent = "Try Again";
       }
     });

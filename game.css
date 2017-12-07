@@ -1,6 +1,6 @@
 /* HEADER AND STATUS BAR */
 body {
-  background-color: #232323;
+  background: #232323;
   margin: 0;
   font-family: "Montserrat","Avenir";
   text-transform: uppercase;
@@ -65,7 +65,6 @@ button:hover {
 /* Make six squares using 90% with margins using 10% And use padding to make the squares */
 .square {
   width: 30%;
-  background-color: purple;
   padding-bottom: 30%;
   margin: 1.66%;
   float: left;
